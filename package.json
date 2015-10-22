@@ -1,0 +1,32 @@
+{
+  "name": "json-extra",
+  "version": "0.0.1",
+  "description": "> 'json-extra' gives you a little more power to json files and strings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JPeer264/node-json-extra.git"
+  },
+  "author": "Jan Peer Stöcklmair",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "mkdirp": "^0.5.1"
+  },
+  "bugs": {
+    "url": "https://github.com/JPeer264/node-json-extra/issues"
+  },
+  "homepage": "https://github.com/JPeer264/node-json-extra#readme",
+  "keywords": [
+    "json",
+    "extra",
+    "string",
+    "file",
+    "read",
+    "object",
+    "check"
+  ]
+}
