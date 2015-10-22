@@ -109,3 +109,4 @@ json.create('/any/path/you/want', 'filename', '{"json": "string"}', function(err
 ## Future Methods
 
 **find** Finds specific values or keys
+**check('string|object', json)** check if json is a valid string|object
