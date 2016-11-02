@@ -43,4 +43,12 @@ describe('createSync.js', function () {
 
         done();
     });
+
+    it('should fail', function (done) {
+        var file = base.createSync(testCwd, 'test.json', 123123);
+
+        expect(file).to.be.false;
+
+        done();
+    });
 });
