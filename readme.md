@@ -1,7 +1,7 @@
 # json-extra
 
-[![Coverage Status](https://coveralls.io/repos/github/JPeer264/node-json-extra/badge.svg)](https://coveralls.io/github/JPeer264/node-json-extra)
 [![Build Status](https://travis-ci.org/JPeer264/node-json-extra.svg)](https://travis-ci.org/JPeer264/node-json-extra)
+[![Coverage Status](https://coveralls.io/repos/github/JPeer264/node-json-extra/badge.svg?branch=master)](https://coveralls.io/github/JPeer264/node-json-extra?branch=master)
 
 > 'json-extra' gives you a little more power to json files and strings
 
