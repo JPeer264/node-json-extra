@@ -4,7 +4,9 @@
   "description": "> 'json-extra' gives you a little more power to json files and strings",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive",
+    "coverage": "istanbul cover _mocha -- --recursive",
+    "coveralls": "npm run coverage && coveralls < coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -12,10 +14,6 @@
   },
   "author": "Jan Peer Stöcklmair",
   "license": "MIT",
-  "dependencies": {
-    "colors": "^1.1.2",
-    "mkdirp": "^0.5.1"
-  },
   "bugs": {
     "url": "https://github.com/JPeer264/node-json-extra/issues"
   },
@@ -28,5 +26,16 @@
     "read",
     "object",
     "check"
-  ]
+  ],
+  "dependencies": {
+    "colors": "^1.1.2",
+    "fs-extra": "^1.0.0",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.14",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2"
+  }
 }

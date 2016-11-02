@@ -1,5 +1,8 @@
 # json-extra
 
+[![Coverage Status](https://coveralls.io/repos/github/JPeer264/node-json-extra/badge.svg)](https://coveralls.io/github/JPeer264/node-json-extra)
+[![Build Status](https://travis-ci.org/JPeer264/node-json-extra.svg)](https://travis-ci.org/JPeer264/node-json-extra)
+
 > 'json-extra' gives you a little more power to json files and strings
 
 ## Getting started
@@ -55,22 +58,21 @@ If you want to change your json string into a path just hit this method.
 ```js
 var json = require('json-extra')
 
-var myJsonString =
-    {
-        "src": {
-          "app": {
+var myJsonString = {
+    "src": {
+        "app": {
             "base": "app",
             "subfolder": [
-              "components",
-              "pages",
-              "services"
+                "components",
+                "pages",
+                "services"
             ]
-          }
         }
     }
+}
 
-json.toPath(myJsonString);
 // returns: [ 'src', 'src/app', 'src/app/components', 'src/app/pages', 'src/app/services' ]
+json.toPath(myJsonString);
 ```
 
 ### readToObj()
@@ -102,10 +104,11 @@ Create a new json file. The content could be a object or a json string.
 ```js
 var json = require('json-extra')
 
-json.create('/any/path/you/want', 'filename', '{"json": "string"}', function(err) {
+// created a new json file
+json.create('/any/path/you/want', 'filename.json', '{json: "string or object"}', function(err) {
     if (err) return console.error(err)
     console.log('Created!');
-}) // created a new json file
+})
 ```
 
 ## Future Methods
