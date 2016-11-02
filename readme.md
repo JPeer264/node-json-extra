@@ -6,8 +6,15 @@
 > 'json-extra' gives you a little more power to json files and strings
 
 ## Getting started
-```shell
+
+```sh
 npm install --save json-extra
+```
+
+or
+
+```sh
+yarn add json-extra
 ```
 
 ## Usage
@@ -29,6 +36,7 @@ var json = require('json-extra');
 - [readToObjSync](#readToObj)
 - [create](#create)
 - [createSync](#create)
+
 
 ### check()
 
@@ -88,8 +96,8 @@ var json = require('json-extra')
 
 json.readToObj('/path/to/json', function(err, data) {
     if (err) return console.error(err)
-    console.log('My nice data: ')
-    console.log(data)
+
+    console.log('My nice data: ', data)
 }) // read a json file and return an object
 ```
 
@@ -107,6 +115,7 @@ var json = require('json-extra')
 // created a new json file
 json.create('/any/path/you/want', 'filename.json', '{json: "string or object"}', function(err) {
     if (err) return console.error(err)
+
     console.log('Created!');
 })
 ```
