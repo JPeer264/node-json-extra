@@ -36,6 +36,8 @@ var json = require('json-extra');
 - [readToObjSync](#readToObj)
 - [create](#create)
 - [createSync](#create)
+- [write](#create)
+- [writeSync](#create)
 
 
 ### check()
@@ -46,7 +48,7 @@ Check if it is a valid string or object. Just do a `JSON.parse` but with `try - 
 
 `type` valid values: `string` or `object`
 
-*Alias: isJson()*
+Alias: `isJson()`
 
 ```js
 var json = require('json-extra')
@@ -89,7 +91,7 @@ json.toPath(myJsonString);
 
 Read a json file and returns an obj.
 
-*Sync: readToObjSync()*
+Sync: `readToObjSync()`
 
 ```js
 var json = require('json-extra')
@@ -105,9 +107,12 @@ json.readToObj('/path/to/json', function(err, data) {
 
 **create(path, filename[, content], callback)**
 
+
 Create a new json file. The content could be a object or a json string.
 
-*Sync: createSync()*
+Alias: `write()`<br>
+Sync: `createSync()`<br>
+Sync-Alias: `writeSync()`
 
 ```js
 var json = require('json-extra')
