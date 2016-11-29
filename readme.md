@@ -38,6 +38,7 @@ var json = require('json-extra');
 - [createSync](#create)
 - [write](#create)
 - [writeSync](#create)
+- [find](#find)
 
 
 ### check()
@@ -96,11 +97,12 @@ Sync: `readToObjSync()`
 ```js
 var json = require('json-extra')
 
+// read a json file and return an object
 json.readToObj('/path/to/json', function(err, data) {
     if (err) return console.error(err)
 
     console.log('My nice data: ', data)
-}) // read a json file and return an object
+})
 ```
 
 ### create()
@@ -125,6 +127,17 @@ json.create('/any/path/you/want', 'filename.json', '{json: "string or object"}',
 })
 ```
 
-## Future Methods
+### find()
 
-**find** Finds specific values or keys
+**find(jsonObject[, options], findString)**
+
+Finds a specific key in the json
+
+```js
+var json = require('json-extra')
+var myJsonObejct = json.readToObj('./package.json')
+
+// created a new json file
+var foundKeys = json.find(myJsonObject, 'dependencies')
+// returns: [ { key: 'dependencies', type: 'object', data: {} } ]
+```

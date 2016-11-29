@@ -23,3 +23,4 @@ doRequire('create');
 doRequire('createSync');
 doRequire('create', 'write');
 doRequire('createSync', 'writeSync');
+doRequire('find');
