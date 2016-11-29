@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 
 var testCwd = 'test/testCache';
 
-describe('create.js', function () {
+describe('readToObjSync.js', function () {
     it('should read a json file to object', function (done) {
         var data = base.readToObjSync('package.json');
 

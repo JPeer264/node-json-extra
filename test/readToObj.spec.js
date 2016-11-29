@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 
 var testCwd = 'test/testCache';
 
-describe('create.js', function () {
+describe('readToObj.js', function () {
     it('should read a json file to object', function (done) {
         base.readToObj('package.json', function (data, err) {
             expect(err).to.not.exist;
