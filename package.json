@@ -1,6 +1,6 @@
 {
   "name": "json-extra",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "json-extra gives you a little more power to json files and strings",
   "main": "index.js",
   "scripts": {
