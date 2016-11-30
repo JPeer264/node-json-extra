@@ -28,7 +28,8 @@
     "check"
   ],
   "dependencies": {
-    "fs-extra": "^1.0.0"
+    "fs-extra": "^1.0.0",
+    "lodash.includes": "^4.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
