@@ -51,6 +51,8 @@ Check if it is a valid string or object. Just do a `JSON.parse` but with `try - 
 
 Alias: `isJson()`
 
+Example:
+
 ```js
 var json = require('json-extra')
 
@@ -65,6 +67,8 @@ json.isJson(myJsonString) // true | false
 If you want to change your json string into a path just hit this method.
 `base` in an object is always the name of the folder.
 `subfolders` create new subfolders
+
+Example:
 
 ```js
 var json = require('json-extra')
@@ -94,6 +98,8 @@ Read a json file and returns an obj.
 
 Sync: `readToObjSync()`
 
+Example:
+
 ```js
 var json = require('json-extra')
 
@@ -116,6 +122,8 @@ Alias: `write()`<br>
 Sync: `createSync()`<br>
 Sync-Alias: `writeSync()`
 
+Example:
+
 ```js
 var json = require('json-extra')
 
@@ -132,6 +140,13 @@ json.create('/any/path/you/want', 'filename.json', '{json: "string or object"}',
 **find(jsonObject[, options], findString)**
 
 Finds a specific key in the json
+
+Options:
+
+- type (array | string): Get specific types. Available options: `array`, `object`, `string`, `boolean` or `number`
+- max (boolean): The maximum of keys to find. Default: `-1` alias unlimited
+
+Example:
 
 ```js
 var json = require('json-extra')
