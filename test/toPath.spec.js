@@ -3,7 +3,7 @@
 var base   = require('../');
 var expect = require('chai').expect;
 
-describe.only('toPath.js', function () {
+describe('toPath.js', function () {
     it('should create a path', function () {
         var pathArray;
         var jsonObj = {
