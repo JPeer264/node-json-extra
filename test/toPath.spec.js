@@ -30,7 +30,7 @@ describe('toPath.js', function () {
             two: ['hallo']
         };
 
-        pathArray = base.toPath(jsonObj, '/');
+        pathArray = base.toPath(jsonObj);
 
         expect(pathArray[0]).to.equal('one');
         expect(pathArray[1]).to.equal('one/two');
