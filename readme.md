@@ -47,9 +47,10 @@ var json = require('json-extra');
 
 Check if it is a valid string or object. Just do a `JSON.parse` but with `try - catch`. Returns a boolean. The `type` is optional it its default is `string`. If you want to check if you have a object you can type in `object` as `type`.
 
-`type` valid values: `string` or `object`
+`type` valid values: `string` or `object`. Default: `string`
 
 Alias: `isJson()`
+Alias: `isValid()`
 
 Example:
 
@@ -67,6 +68,8 @@ json.isJson(myJsonString) // true | false
 If you want to change your json string into a path just hit this method.
 `base` in an object is always the name of the folder.
 `subfolders` create new subfolders
+
+Alias: `chain()`
 
 Example:
 

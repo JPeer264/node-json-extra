@@ -8,15 +8,23 @@ var jsonExtra = module.exports = {
 }
 
 function doRequire(name, alias) {
-    if (alias){
+    jsonExtra[name] = require('./lib/' + name);
+
+    if (alias) {
+        if (Object.prototype.toString.call(alias) === '[object Array]') {
+            for (var aka in alias) {
+                jsonExtra[aka] = require('./lib/' + name);
+            }
+
+            return
+        }
+
         return jsonExtra[alias] = require('./lib/' + name);
     }
-
-    return jsonExtra[name] = require('./lib/' + name);
 }
 
-doRequire('check');
-doRequire('toPath');
+doRequire('check', ['isJson', 'isValid']);
+doRequire('toPath', 'chain');
 doRequire('readToObj');
 doRequire('readToObjSync');
 doRequire('create');
