@@ -62,7 +62,7 @@ json.isJson(myJsonString) // true | false
 
 ### toPath()
 
-**toPath(json)**
+**toPath(json[, delimiter])**
 
 If you want to change your json string into a path just hit this method.
 `base` in an object is always the name of the folder.
