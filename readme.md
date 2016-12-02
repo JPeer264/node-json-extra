@@ -31,7 +31,9 @@ var json = require('json-extra');
 
 - [check](#check)
 - [isJson](#check)
+- [isValid](#check)
 - [toPath](#toPath)
+- [chain](#toPath)
 - [readToObj](#readToObj)
 - [readToObjSync](#readToObj)
 - [create](#create)
@@ -63,7 +65,11 @@ json.isJson(myJsonString) // true | false
 
 ### toPath()
 
-**toPath(json[, delimiter])**
+**toPath(json[, options][, delimiter])**
+
+Options:
+
+- type (array | string): Get specific types. Available options: `array`, `object`, `string`, `boolean` or `number`
 
 If you want to change your json string into a path just hit this method.
 `base` in an object is always the name of the folder.
