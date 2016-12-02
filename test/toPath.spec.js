@@ -49,4 +49,58 @@ describe('toPath.js', function () {
         expect(pathArray).to.be.an('array');
         expect(pathArray.length).to.equal(0);
     });
+
+    describe('check its options', function () {
+        var jsonString;
+
+        beforeEach(function () {
+            jsonString = {
+                one: {
+                    two: [
+                        'two-one',
+                        'two-two'
+                    ],
+                    'twotwo': {
+                        three: [
+                            'three-one',
+                            'three-two',
+                            'three-three'
+                        ],
+                        'threetwo': {
+                            four: [
+                                'four-one',
+                                'four-two',
+                                'four-three'
+                            ]
+                        }
+                    }
+                },
+                two: ['hallo']
+            };
+        });
+
+        it('type: should just get the keys of objects', function () {
+            var pathArray = base.toPath(jsonString, {
+                'type': 'object'
+            });
+
+            expect(pathArray.length).to.equal(3);
+        });
+
+        it('type: should just get keys of objects and strings of arrays', function () {
+            var pathArray = base.toPath(jsonString, {
+                'type': ['object', 'string']
+            });
+
+            expect(pathArray.length).to.equal(12);
+        });
+
+        it('type: should just get arrays', function () {
+            var pathArray = base.toPath(jsonString, {
+                'type': ['array']
+            });
+
+            expect(pathArray.length).to.equal(4);
+        });
+    });
 });
