@@ -1,11 +1,11 @@
 'use strict';
 
-var base   = require('../');
-var expect = require('chai').expect;
+const base   = require('../');
+const expect = require('chai').expect;
 
-describe('find.js', function () {
-    it('should return the expected output', function () {
-        var jsonfile = {
+describe('find.js', () => {
+    it('should return the expected output', () => {
+        const jsonfile = {
             path: 'a path',
             nested: {
                 path: 'a second path',
@@ -17,7 +17,7 @@ describe('find.js', function () {
             },
             findme: ['test']
         };
-        var foundKeys = base.find(jsonfile, 'findme');
+        const foundKeys = base.find(jsonfile, 'findme');
 
         expect(foundKeys).to.be.an('array');
         expect(foundKeys.length).to.equal(3);
@@ -26,14 +26,14 @@ describe('find.js', function () {
         expect(foundKeys[0].data).to.equal('find this string');
     });
 
-    it('should check if it is an array or object', function () {
-        var jsonfile = {
+    it('should check if it is an array or object', () => {
+        const jsonfile = {
             findme: ['test'],
             test: {
                 findme: {test: 'test'}
             }
         };
-        var foundKeys = base.find(jsonfile, 'findme');
+        const foundKeys = base.find(jsonfile, 'findme');
 
         expect(foundKeys).to.be.an('array');
         expect(foundKeys.length).to.equal(2);
@@ -43,10 +43,10 @@ describe('find.js', function () {
         expect(foundKeys[1].type).to.equal('object');
     });
 
-    describe('check its options', function() {
-        var jsonfile;
+    describe('check its options', () => {
+        let jsonfile;
 
-        beforeEach(function () {
+        beforeEach(() => {
             jsonfile = {
                 path: 'a path',
                 nested: {
@@ -61,8 +61,8 @@ describe('find.js', function () {
             };
         });
 
-        it('type: should check the type option as string', function () {
-            var foundKeys = base.find(jsonfile, {
+        it('type: should check the type option as string', () => {
+            const foundKeys = base.find(jsonfile, {
                 type: 'string'
             }, 'findme');
 
@@ -70,8 +70,8 @@ describe('find.js', function () {
             expect(foundKeys[0].type).to.equal('string');
         });
 
-        it('type: should check the type option as array', function () {
-            var foundKeys = base.find(jsonfile, {
+        it('type: should check the type option as array', () => {
+            const foundKeys = base.find(jsonfile, {
                 type: ['object', 'array']
             }, 'findme');
 
@@ -80,11 +80,11 @@ describe('find.js', function () {
             expect(foundKeys[1].type).to.equal('array');
         });
 
-        it('max: should check if the maximum is reduced', function () {
-            var foundKeys = base.find(jsonfile, {
+        it('max: should check if the maximum is reduced', () => {
+            const foundKeys = base.find(jsonfile, {
                 max: 1
             }, 'findme');
-            var foundKeys2 = base.find(jsonfile, {
+            const foundKeys2 = base.find(jsonfile, {
                 max: 2
             }, 'findme');
 
