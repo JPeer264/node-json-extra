@@ -1,7 +1,6 @@
 'use strict';
-'use strict';
 
-var jsonExtra = module.exports = {
+const jsonExtra = module.exports = {
     // some json methods
     parse: JSON.parse,
     stringify: JSON.stringify,
@@ -12,7 +11,7 @@ function doRequire(name, alias) {
 
     if (alias) {
         if (Object.prototype.toString.call(alias) === '[object Array]') {
-            for (var aka in alias) {
+            for (let aka in alias) {
                 jsonExtra[aka] = require('./lib/' + name);
             }
 
