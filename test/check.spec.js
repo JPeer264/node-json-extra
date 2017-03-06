@@ -1,6 +1,6 @@
 'use strict';
 
-const base   = require('../');
+const base   = require('../dest/');
 const expect = require('chai').expect;
 
 describe('check.js', () => {

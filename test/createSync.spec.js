@@ -1,6 +1,6 @@
 'use strict';
 
-const base   = require('../');
+const base   = require('../dest/');
 const fs     = require('fs-extra');
 const path   = require('path');
 const expect = require('chai').expect;
