@@ -2,11 +2,14 @@
   "name": "json-extra",
   "version": "1.0.0",
   "description": "json-extra gives you a little more power to json files and strings",
-  "main": "index.js",
+  "main": "dest/index.js",
   "scripts": {
+    "pretest": "npm run babel",
     "test": "mocha --recursive",
+    "prepublish": "npm run babel",
     "coverage": "istanbul cover _mocha -- --recursive",
-    "coveralls": "npm run coverage && coveralls < coverage/lcov.info"
+    "coveralls": "npm run coverage && coveralls < coverage/lcov.info",
+    "babel": "babel lib --out-dir=dest"
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,8 @@
     "lodash.includes": "^4.3.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-env": "^1.2.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
     "istanbul": "^0.4.5",
