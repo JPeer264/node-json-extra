@@ -35,22 +35,22 @@ Sync methods on the other hand will throw if an error occurs.
 
 Example:
 ```js
-import { create, createSync } from 'json-extra';
+import { write, writeSync } from 'json-extra';
 
 // Async with promises:
-create('/any/path/you/want', 'filename.json', '{json: "string or object"}')
+write('/any/path/you/want', 'filename.json', '{json: "string or object"}')
   .then(() => console.log('success!'))
   .catch(err => console.error(err))
 
 // Async with callbacks:
-create('/any/path/you/want', 'filename.json', '{json: "string or object"}', err => {
+write('/any/path/you/want', 'filename.json', '{json: "string or object"}', err => {
   if (err) return console.error(err)
   console.log('success!')
 })
 
 // Sync:
 try {
-  createSync('/any/path/you/want', 'filename.json', '{json: "string or object"}')
+  writeSync('/any/path/you/want', 'filename.json', '{json: "string or object"}')
   console.log('success!')
 } catch (err) {
   console.error(err)
@@ -64,8 +64,8 @@ try {
 - [chain](#chain)
 - [readToObj](#readToObj)
 - [readToObjSync](#readToObj)
-- [create](#create)
-- [createSync](#create)
+- [write](#write)
+- [writeSync](#write)
 - [find](#find)
 
 ### isJson()
@@ -153,22 +153,22 @@ readToObj('/path/to/json')
     .catch(console.error);
 ```
 
-### create()
+### write()
 
-**create(path, filename[, content, callback])**
+**write(path, filename[, content, callback])**
 
-Create a new json file. The content could be a object or a json string.
+write a new json file. The content could be a object or a json string.
 
-Sync: `createSync()`
+Sync: `writeSync()`
 
 Example:
 
 ```js
-import { create } from 'json-extra';
+import { write } from 'json-extra';
 
-// created a new json file
-create('/any/path/you/want', 'filename.json', '{json: "string or object"}')
-    .then(() => console.log('Created!'))
+// writed a new json file
+write('/any/path/you/want', 'filename.json', '{json: "string or object"}')
+    .then(() => console.log('Written!'))
     .catch(console.error);
 ```
 
