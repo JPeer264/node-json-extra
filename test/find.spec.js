@@ -1,95 +1,80 @@
-'use strict';
+import test from 'ava';
 
-const base   = require('../dest/');
-const expect = require('chai').expect;
+import { find } from '../lib';
 
-describe('find.js', () => {
-    it('should return the expected output', () => {
-        const jsonfile = {
-            path: 'a path',
+let jsonfile;
+
+test.beforeEach(() => {
+    jsonfile = {
+        path: 'a path',
+        nested: {
+            path: 'a second path',
+            findme: 'find this string',
             nested: {
-                path: 'a second path',
-                findme: 'find this string',
-                nested: {
-                    path: 'a third path',
-                    findme: 'find this second string'
-                },
+                path: 'a third path',
+                findme: { test: 'find this an object' }
             },
-            findme: ['test']
-        };
-        const foundKeys = base.find(jsonfile, 'findme');
+        },
+        findme: ['this is an array']
+    };
+});
 
-        expect(foundKeys).to.be.an('array');
-        expect(foundKeys.length).to.equal(3);
-        expect(foundKeys[0].data).to.be.an('string');
-        expect(foundKeys[2].data).to.be.an('array');
-        expect(foundKeys[0].data).to.equal('find this string');
-    });
+test('should return the t.ised output', (t) => {
+    const foundKeys = find(jsonfile, 'findme');
 
-    it('should check if it is an array or object', () => {
-        const jsonfile = {
-            findme: ['test'],
-            test: {
-                findme: {test: 'test'}
-            }
-        };
-        const foundKeys = base.find(jsonfile, 'findme');
+    t.is(Object.prototype.toString.call(foundKeys), '[object Array]');
+    t.is(foundKeys.length, 3);
+    t.is(typeof foundKeys[0].data, 'string');
+    t.is(Object.prototype.toString.call(foundKeys[2].data), '[object Array]');
+    t.is(foundKeys[0].data, 'find this string');
+});
 
-        expect(foundKeys).to.be.an('array');
-        expect(foundKeys.length).to.equal(2);
-        expect(foundKeys[0].data).to.be.an('array');
-        expect(foundKeys[0].type).to.equal('array');
-        expect(foundKeys[1].data).to.be.an('object');
-        expect(foundKeys[1].type).to.equal('object');
-    });
+test('should check if it is an array or object', (t) => {
+    jsonfile = {
+        findme: ['test'],
+        test: {
+            findme: { test: 'test' }
+        }
+    };
 
-    describe('check its options', () => {
-        let jsonfile;
+    const foundKeys = find(jsonfile, 'findme');
 
-        beforeEach(() => {
-            jsonfile = {
-                path: 'a path',
-                nested: {
-                    path: 'a second path',
-                    findme: 'find this string',
-                    nested: {
-                        path: 'a third path',
-                        findme: {test: 'find this an object'}
-                    },
-                },
-                findme: ['this is an array']
-            };
-        });
+    t.is(Object.prototype.toString.call(foundKeys), '[object Array]');
+    t.is(foundKeys.length, 2);
+    t.is(Object.prototype.toString.call(foundKeys[0].data), '[object Array]');
+    t.is(foundKeys[0].type, 'array');
+    t.is(Object.prototype.toString.call(foundKeys[1].data), '[object Object]');
+    t.is(foundKeys[1].type, 'object');
+});
 
-        it('type: should check the type option as string', () => {
-            const foundKeys = base.find(jsonfile, {
-                type: 'string'
-            }, 'findme');
 
-            expect(foundKeys.length).to.equal(1);
-            expect(foundKeys[0].type).to.equal('string');
-        });
+test('type: should check the type option as string', (t) => {
+    const foundKeys = find(jsonfile, {
+        type: 'string'
+    }, 'findme');
 
-        it('type: should check the type option as array', () => {
-            const foundKeys = base.find(jsonfile, {
-                type: ['object', 'array']
-            }, 'findme');
+    t.is(foundKeys.length, 1);
+    t.is(foundKeys[0].type, 'string');
+});
 
-            expect(foundKeys.length).to.equal(2);
-            expect(foundKeys[0].type).to.equal('object');
-            expect(foundKeys[1].type).to.equal('array');
-        });
+test('type: should check the type option as array', (t) => {
+    const foundKeys = find(jsonfile, {
+        type: ['object', 'array']
+    }, 'findme');
 
-        it('max: should check if the maximum is reduced', () => {
-            const foundKeys = base.find(jsonfile, {
-                max: 1
-            }, 'findme');
-            const foundKeys2 = base.find(jsonfile, {
-                max: 2
-            }, 'findme');
+    t.is(foundKeys.length, 2);
+    t.is(foundKeys[0].type, 'object');
+    t.is(foundKeys[1].type, 'array');
+});
 
-            expect(foundKeys.length).to.equal(1);
-            expect(foundKeys2.length).to.equal(2);
-        });
-    });
+test('max: should check if the maximum is reduced', (t) => {
+    const foundKeys = find(jsonfile, {
+        max: 1
+    }, 'findme');
+    const foundKeys2 = find(jsonfile, {
+        max: 2
+    }, 'findme');
+
+    t.is(foundKeys.length, 1);
+    t.is(foundKeys2.length, 2);
 });

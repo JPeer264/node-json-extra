@@ -1,6 +1,7 @@
 coverage
 node_modules
 dest
+.nyc_output
 
 # MacOS
 .DS_STORE

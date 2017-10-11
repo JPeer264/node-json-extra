@@ -1,21 +1,18 @@
-'use strict';
+import test from 'ava';
 
-const base   = require('../dest/');
-const expect = require('chai').expect;
+import { readToObjSync } from '../lib';
 
 const testCwd = 'test/testCache';
 
-describe('readToObjSync.js', () => {
-    it('should read a json file to object', () => {
-        const data = base.readToObjSync('package.json');
+test('should read a json file to object', (t) => {
+    const data = readToObjSync('package.json');
 
-        expect(data).to.be.an('object');
-        expect(data.name).to.be.a('string');
-    });
+    t.is(Object.prototype.toString.call(data), '[object Object]');
+    t.is(typeof data.name, 'string');
+});
 
-    it('should fail', () => {
-        const data = base.readToObjSync('doesnotexist.json');
+test('should fail', (t) => {
+    const data = readToObjSync('doesnotexist.json');
 
-        expect(data).to.be.false;
-    });
+    t.is(data, false);
 });

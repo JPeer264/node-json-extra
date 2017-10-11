@@ -1,71 +1,64 @@
-'use strict';
+import test from 'ava';
+import fs from 'fs-extra';
+import path from 'path';
 
-const base   = require('../dest/');
-const fs     = require('fs-extra');
-const path   = require('path');
-const expect = require('chai').expect;
+import { create } from '../lib';
 
 const testCwd = 'test/testCache';
 
-describe('create.js', () => {
-    afterEach(() => {
-        fs.removeSync(testCwd);
+test.afterEach(() => {
+    fs.removeSync(testCwd);
+});
+
+test.cb.serial('should generate a json file from string', (t) => {
+    create(testCwd, 'test.json', '{"test": "string"}', (err) => {
+        t.is(err, undefined);
+        t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
+
+        t.end();
     });
+});
 
-    it('should generate a json file from string', done => {
-        base.create(testCwd, 'test.json', '{"test": "string"}', err => {
-            expect(err).to.not.exist;
+test.cb.serial('should generate a json file from object', (t) => {
+    create(testCwd, 'test.json', { test: 'string' }, (err) => {
+        t.is(err, undefined);
+        t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
 
-            expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
-
-            done();
-        });
+        t.end();
     });
+});
 
-    it('should generate a json file from object', done => {
-        base.create(testCwd, 'test.json', {"test": "string"}, err => {
-            expect(err).to.not.exist;
+test.cb.serial('should generate an empty json file', (t) => {
+    create(testCwd, 'test.json', (err) => {
+        t.is(err, undefined);
+        t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
 
-            expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
-
-            done();
-        });
+        t.end();
     });
+});
 
-    it('should generate an empty json file', done => {
-        base.create(testCwd, 'test.json', err => {
-            expect(err).to.not.exist;
+test.cb.serial('should set the extname to json if it is not set to it', (t) => {
+    create(testCwd, 'test.jayson', '{"test": "string"}', (err) => {
+        t.is(err, undefined);
+        t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
+        t.is(fs.existsSync(path.join(testCwd, 'test.jayson')), false);
 
-            expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
-
-            done();
-        });
+        t.end();
     });
+});
 
-    it('should set the extname to json if it is not set to it', done => {
-        base.create(testCwd, 'test.jayson', '{"test": "string"}', err => {
-            expect(err).to.not.exist;
+test.cb.serial('should fail', (t) => {
+    create(testCwd, 'test.jayson', 123123, (err) => {
+        t.is(err.error, 'NOJSON');
 
-            expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
-            expect(fs.existsSync(path.join(testCwd, 'test.jayson'))).to.be.false;
-
-            done();
-        });
+        t.end();
     });
+});
 
-    it('should fail', done => {
-        base.create(testCwd, 'test.jayson', 123123, err => {
-            expect(err.error).to.equal('NOJSON');
+test.cb.serial('should fail', (t) => {
+    create(testCwd, 'test.json', '{"test"; "string"}', (err) => {
+        t.is(err.error, 'NOJSON');
 
-            done();
-        });
-    });
-
-    it('should fail', done => {
-        base.create(testCwd, 'test.json', '{"test"; "string"}', err => {
-            expect(err.error).to.equal('NOJSON');
-
-            done();
-        });
+        t.end();
     });
 });

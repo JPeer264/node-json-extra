@@ -4,18 +4,22 @@
   "description": "json-extra gives you a little more power to json files and strings",
   "main": "dest/index.js",
   "scripts": {
-    "pretest": "npm run babel",
-    "test": "mocha --recursive",
+    "pretest": "npm run lint",
+    "test": "nyc ava",
     "lint": "eslint lib",
     "fix": "eslint lib --fix",
     "prepublish": "npm run babel",
-    "coverage": "istanbul cover _mocha -- --recursive",
-    "coveralls": "npm run coverage && coveralls < coverage/lcov.info",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "babel": "babel lib --out-dir=dest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JPeer264/node-json-extra.git"
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ]
   },
   "author": "Jan Peer Stöcklmair",
   "license": "MIT",
@@ -38,15 +42,15 @@
     "object.entries": "^1.0.4"
   },
   "devDependencies": {
+    "ava": "^0.22.0",
     "babel-cli": "^6.23.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.2.0",
-    "chai": "^3.5.0",
+    "babel-register": "^6.26.0",
     "coveralls": "^2.11.14",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.1.2"
+    "nyc": "^11.2.1"
   }
 }

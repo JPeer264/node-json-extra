@@ -1,54 +1,41 @@
-'use strict';
+import test from 'ava';
+import fs from 'fs-extra';
+import path from 'path';
 
-const base   = require('../dest/');
-const fs     = require('fs-extra');
-const path   = require('path');
-const expect = require('chai').expect;
+import { createSync } from '../lib';
 
 const testCwd = 'test/testCache';
 
-describe('createSync.js', () => {
-    afterEach(() => {
-        fs.removeSync(testCwd);
-    });
+test.afterEach(() => {
+    fs.removeSync(testCwd);
+});
 
-    it('should generate a json file from string', done => {
-        const file = base.createSync(testCwd, 'test.json', '{"test": "string"}');
+test('should generate a json file from string', (t) => {
+    createSync(testCwd, 'test.json', '{"test": "string"}');
 
-        expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
+    t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
+});
 
-        done();
-    });
+test('should generate a json file from object', (t) => {
+    createSync(testCwd, 'test.json', { test: 'string' });
 
-    it('should generate a json file from object', done => {
-        const file = base.createSync(testCwd, 'test.json', {"test": "string"});
+    t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
+});
 
-        expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
+test('should generate an empty json file', (t) => {
+    createSync(testCwd, 'test.json');
 
-        done();
-    });
+    t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
+});
 
-    it('should generate an empty json file', done => {
-        const file = base.createSync(testCwd, 'test.json');
+test('should fail', (t) => {
+    const file = createSync(testCwd, 'test.json', '{"test"; "string"}');
 
-        expect(fs.existsSync(path.join(testCwd, 'test.json'))).to.be.true;
+    t.is(file, false);
+});
 
-        done();
-    });
+test('should fail', (t) => {
+    const file = createSync(testCwd, 'test.json', 123123);
 
-    it('should fail', done => {
-        const file = base.createSync(testCwd, 'test.json', '{"test"; "string"}');
-
-        expect(file).to.be.false;
-
-        done();
-    });
-
-    it('should fail', done => {
-        const file = base.createSync(testCwd, 'test.json', 123123);
-
-        expect(file).to.be.false;
-
-        done();
-    });
+    t.is(file, false);
 });

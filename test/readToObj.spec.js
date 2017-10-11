@@ -1,27 +1,24 @@
-'use strict';
+import test from 'ava';
 
-const base   = require('../dest/');
-const expect = require('chai').expect;
+import { readToObj } from '../lib';
 
 const testCwd = 'test/testCache';
 
-describe('readToObj.js', () => {
-    it('should read a json file to object', done => {
-        base.readToObj('package.json', (data, err) => {
-            expect(err).to.not.exist;
+test.cb('should read a json file to object', (t) => {
+    readToObj('package.json', (data, err) => {
+        t.is(err, undefined);
 
-            expect(data).to.be.an('object');
-            expect(data.name).to.be.a('string');
+        t.is(Object.prototype.toString.call(data), '[object Object]');
+        t.is(typeof data.name, 'string');
 
-            done();
-        });
+        t.end();
     });
+});
 
-    it('should fail', done => {
-        base.readToObj('doesnotexist.json', (data, err) => {
-            expect(err).to.be.false;
+test.cb('should fail', (t) => {
+    readToObj('doesnotexist.json', (data, err) => {
+        t.is(err, false);
 
-            done();
-        });
+        t.end();
     });
 });
