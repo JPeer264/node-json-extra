@@ -3,7 +3,7 @@
 const base   = require('../dest/');
 const expect = require('chai').expect;
 
-describe('toPath.js', () => {
+describe('chain.js', () => {
     it('should create a path', () => {
         const jsonObj = {
             one: {
@@ -29,7 +29,7 @@ describe('toPath.js', () => {
             two: ['hallo']
         };
 
-        let pathArray = base.toPath(jsonObj);
+        let pathArray = base.chain(jsonObj);
 
         expect(pathArray[0]).to.equal('one');
         expect(pathArray[1]).to.equal('one/two');
@@ -43,7 +43,7 @@ describe('toPath.js', () => {
 
     it('should not create a path', () => {
         const jsonString = '{test; "test"}';
-        const pathArray = base.toPath(jsonString);
+        const pathArray = base.chain(jsonString);
 
         expect(pathArray).to.be.an('array');
         expect(pathArray.length).to.equal(0);
@@ -79,7 +79,7 @@ describe('toPath.js', () => {
         });
 
         it('type: should just get the keys of objects', () => {
-            const pathArray = base.toPath(jsonString, {
+            const pathArray = base.chain(jsonString, {
                 'type': 'object'
             });
 
@@ -87,7 +87,7 @@ describe('toPath.js', () => {
         });
 
         it('type: should just get keys of objects and strings of arrays', () => {
-            const pathArray = base.toPath(jsonString, {
+            const pathArray = base.chain(jsonString, {
                 'type': ['object', 'string']
             });
 
@@ -95,7 +95,7 @@ describe('toPath.js', () => {
         });
 
         it('type: should just get arrays', () => {
-            const pathArray = base.toPath(jsonString, {
+            const pathArray = base.chain(jsonString, {
                 'type': ['array']
             });
 
