@@ -60,6 +60,7 @@ try {
 ## Methods
 
 - [isJson](#isJson)
+- [isJsonString](#isJsonString)
 - [chain](#chain)
 - [readToObj](#readToObj)
 - [readToObjSync](#readToObj)
@@ -69,19 +70,34 @@ try {
 
 ### isJson()
 
-**isJson([type,] json)**
+**isJson(json)**
 
-Check if it is a valid string or object. Just do a `JSON.parse` but with `try - catch`. Returns a boolean. The `type` is optional it its default is `string`. If you want to check if you have a object you can type in `object` as `type`.
-
-`type` valid values: `string` or `object`. Default: `string`
+Checks if the input is a valid json object
 
 Example:
 
 ```js
 import { isJson } from 'json-extra';
 
-isJson('object', myObject); // true | false
-isJson(myJsonString); // true | false
+isJson({ myJson: '' }); // true
+isJson('{ myJson: '' }'); // false
+isJson('nope'); // false
+```
+
+### isJsonString()
+
+**isJsonString(jsonString)**
+
+Checks if the given string would be a valid json object
+
+Example:
+
+```js
+import { isJsonString } from 'json-extra';
+
+isJsonString('{ myJson: '' }'); // true
+isJsonString({ myJson: '' }); // false
+isJsonString('nope'); // false
 ```
 
 ### chain()
