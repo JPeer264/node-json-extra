@@ -3,11 +3,11 @@
 const base = require('../dest/');
 const expect = require('chai').expect;
 
-describe('check.js', () => {
+describe('isJson.js', () => {
     it('should fail', done => {
         const invalidJson = '{"test"; "invalid"}';
 
-        expect(base.check(invalidJson)).to.be.false;
+        expect(base.isJson(invalidJson)).to.be.false;
 
         done();
     });
@@ -15,7 +15,7 @@ describe('check.js', () => {
     it('should be a valid json string', done => {
         const jsonString = '{"test": "valid"}';
 
-        expect(base.check(jsonString)).to.be.true;
+        expect(base.isJson(jsonString)).to.be.true;
 
         done();
     });
@@ -23,7 +23,7 @@ describe('check.js', () => {
     it('should be a valid json object', done => {
         const jsonObject = {"test": "valid"};
 
-        expect(base.check('object', jsonObject)).to.be.true;
+        expect(base.isJson('object', jsonObject)).to.be.true;
 
         done();
     });

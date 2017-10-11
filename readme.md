@@ -29,9 +29,7 @@ var json = require('json-extra');
 
 ## Methods
 
-- [check](#check)
-- [isJson](#check)
-- [isValid](#check)
+- [isJson](#isJson)
 - [toPath](#toPath)
 - [chain](#toPath)
 - [readToObj](#readToObj)
@@ -43,23 +41,20 @@ var json = require('json-extra');
 - [find](#find)
 
 
-### check()
+### isJson()
 
-**check([type,] json)**
+**isJson([type,] json)**
 
 Check if it is a valid string or object. Just do a `JSON.parse` but with `try - catch`. Returns a boolean. The `type` is optional it its default is `string`. If you want to check if you have a object you can type in `object` as `type`.
 
 `type` valid values: `string` or `object`. Default: `string`
-
-Alias: `isJson()`
-Alias: `isValid()`
 
 Example:
 
 ```js
 var json = require('json-extra')
 
-json.check('object', myObject) // true | false
+json.isJson('object', myObject) // true | false
 json.isJson(myJsonString) // true | false
 ```
 
