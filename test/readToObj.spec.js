@@ -2,23 +2,21 @@ import test from 'ava';
 
 import { readToObj } from '../lib';
 
-const testCwd = 'test/testCache';
-
 test.cb('should read a json file to object', (t) => {
-    readToObj('package.json', (data, err) => {
-        t.is(err, undefined);
+  readToObj('package.json', (data, err) => {
+    t.is(err, undefined);
 
-        t.is(Object.prototype.toString.call(data), '[object Object]');
-        t.is(typeof data.name, 'string');
+    t.is(Object.prototype.toString.call(data), '[object Object]');
+    t.is(typeof data.name, 'string');
 
-        t.end();
-    });
+    t.end();
+  });
 });
 
 test.cb('should fail', (t) => {
-    readToObj('doesnotexist.json', (data, err) => {
-        t.is(err, false);
+  readToObj('doesnotexist.json', (data, err) => {
+    t.is(err, false);
 
-        t.end();
-    });
+    t.end();
+  });
 });
