@@ -102,15 +102,12 @@ isJsonString('nope'); // false
 
 ### chain()
 
-**chain(json[, options][, delimiter])**
+**chain(json[, options])**
 
 Options:
 
 - type (array | string): Get specific types. Available options: `array`, `object`, `string`, `boolean` or `number`
-
-If you want to change your json string into a path just hit this method.
-`base` in an object is always the name of the folder.
-`subfolders` create new subfolders
+- delimiter (string): Changes the delimiter between the chained strings. Default: `'/'`
 
 Example:
 
@@ -118,20 +115,21 @@ Example:
 import { chain } from 'json-extra';
 
 var myJsonString = {
-    src: {
-        app: {
-            base: 'app',
-            subfolder: [
-                'components',
-                'pages',
-                'services',
-            ],
-        },
+    myJson: {
+        sub: [
+            'components',
+            'pages',
+            'services',
+        ],
     },
 };
 
-// returns: [ 'src', 'src/app', 'src/app/components', 'src/app/pages', 'src/app/services' ]
 chain(myJsonString);
+// returns: [ 'myJson', 'myJson/sub', 'myJson/sub/components', 'myJson/sub/pages', 'myJson/sub/services' ]
+chain(myJsonString, { type: 'array' });
+// returns: [ 'myJson/sub' ]
+chain(myJsonString, { type: 'string' });
+// returns: [ 'myJson/sub/components', 'myJson/sub/pages', 'myJson/sub/services' ]
 ```
 
 ### readToObj()
