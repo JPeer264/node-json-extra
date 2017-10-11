@@ -24,22 +24,48 @@ With `json-extra` you can do such things like read json files and directly parse
 
 Include `json-extra` as follows:
 ```js
-var json = require('json-extra');
+import * as json from 'json-extra';
+```
+
+## Sync vs. Async
+
+Most methods are async by default. All async methods will return a promise if the callback isn't passed.
+
+Sync methods on the other hand will throw if an error occurs.
+
+Example:
+```js
+import { create, createSync } from 'json-extra';
+
+// Async with promises:
+create('/any/path/you/want', 'filename.json', '{json: "string or object"}')
+  .then(() => console.log('success!'))
+  .catch(err => console.error(err))
+
+// Async with callbacks:
+create('/any/path/you/want', 'filename.json', '{json: "string or object"}', err => {
+  if (err) return console.error(err)
+  console.log('success!')
+})
+
+// Sync:
+try {
+  createSync('/any/path/you/want', 'filename.json', '{json: "string or object"}')
+  console.log('success!')
+} catch (err) {
+  console.error(err)
+}
 ```
 
 ## Methods
 
 - [isJson](#isJson)
-- [toPath](#toPath)
-- [chain](#toPath)
+- [chain](#chain)
 - [readToObj](#readToObj)
 - [readToObjSync](#readToObj)
 - [create](#create)
 - [createSync](#create)
-- [write](#create)
-- [writeSync](#create)
 - [find](#find)
-
 
 ### isJson()
 
@@ -52,15 +78,15 @@ Check if it is a valid string or object. Just do a `JSON.parse` but with `try - 
 Example:
 
 ```js
-var json = require('json-extra')
+import { isJson } from 'json-extra';
 
-json.isJson('object', myObject) // true | false
-json.isJson(myJsonString) // true | false
+isJson('object', myObject); // true | false
+isJson(myJsonString); // true | false
 ```
 
-### toPath()
+### chain()
 
-**toPath(json[, options][, delimiter])**
+**chain(json[, options][, delimiter])**
 
 Options:
 
@@ -70,33 +96,31 @@ If you want to change your json string into a path just hit this method.
 `base` in an object is always the name of the folder.
 `subfolders` create new subfolders
 
-Alias: `chain()`
-
 Example:
 
 ```js
-var json = require('json-extra')
+import { chain } from 'json-extra';
 
 var myJsonString = {
-    "src": {
-        "app": {
-            "base": "app",
-            "subfolder": [
-                "components",
-                "pages",
-                "services"
-            ]
-        }
-    }
-}
+    src: {
+        app: {
+            base: 'app',
+            subfolder: [
+                'components',
+                'pages',
+                'services',
+            ],
+        },
+    },
+};
 
 // returns: [ 'src', 'src/app', 'src/app/components', 'src/app/pages', 'src/app/services' ]
-json.toPath(myJsonString);
+chain(myJsonString);
 ```
 
 ### readToObj()
 
-**readToObj(path, callback)**
+**readToObj(path[, callback])**
 
 Read a json file and returns an obj.
 
@@ -105,38 +129,31 @@ Sync: `readToObjSync()`
 Example:
 
 ```js
-var json = require('json-extra')
+import { readToObj } from 'json-extra';
 
 // read a json file and return an object
-json.readToObj('/path/to/json', function(err, data) {
-    if (err) return console.error(err)
-
-    console.log('My nice data: ', data)
-})
+readToObj('/path/to/json')
+    .then(data => console.log('My nice data: ', data))
+    .catch(console.error);
 ```
 
 ### create()
 
-**create(path, filename[, content], callback)**
-
+**create(path, filename[, content, callback])**
 
 Create a new json file. The content could be a object or a json string.
 
-Alias: `write()`<br>
-Sync: `createSync()`<br>
-Sync-Alias: `writeSync()`
+Sync: `createSync()`
 
 Example:
 
 ```js
-var json = require('json-extra')
+import { create } from 'json-extra';
 
 // created a new json file
-json.create('/any/path/you/want', 'filename.json', '{json: "string or object"}', function(err) {
-    if (err) return console.error(err)
-
-    console.log('Created!');
-})
+create('/any/path/you/want', 'filename.json', '{json: "string or object"}')
+    .then(() => console.log('Created!'))
+    .catch(console.error);
 ```
 
 ### find()
@@ -153,10 +170,9 @@ Options:
 Example:
 
 ```js
-var json = require('json-extra')
-var myJsonObejct = json.readToObj('./package.json')
+import { find, readToObj } from 'json-extra';
 
-// created a new json file
-var foundKeys = json.find(myJsonObject, 'dependencies')
+const myJsonObejct = readToObj('./package.json')
+const foundKeys = find(myJsonObject, 'dependencies')
 // returns: [ { key: 'dependencies', type: 'object', data: {} } ]
 ```

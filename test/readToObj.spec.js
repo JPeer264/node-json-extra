@@ -3,8 +3,8 @@ import test from 'ava';
 import { readToObj } from '../lib';
 
 test.cb('should read a json file to object', (t) => {
-  readToObj('package.json', (data, err) => {
-    t.is(err, undefined);
+  readToObj('package.json', (err, data) => {
+    t.is(err, null);
 
     t.is(Object.prototype.toString.call(data), '[object Object]');
     t.is(typeof data.name, 'string');
@@ -13,8 +13,18 @@ test.cb('should read a json file to object', (t) => {
   });
 });
 
+test.cb('should read a json file to object | promise', (t) => {
+  readToObj('package.json')
+    .then((data) => {
+      t.is(Object.prototype.toString.call(data), '[object Object]');
+      t.is(typeof data.name, 'string');
+
+      t.end();
+    });
+});
+
 test.cb('should fail', (t) => {
-  readToObj('doesnotexist.json', (data, err) => {
+  readToObj('doesnotexist.json', (err) => {
     t.is(err, false);
 
     t.end();

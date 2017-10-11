@@ -19,6 +19,15 @@ test.cb.serial('should generate a json file from string', (t) => {
   });
 });
 
+test.cb.serial('should generate a json file from string', (t) => {
+  create(testCwd, 'test.json', '{"test": "string"}').then((err) => {
+    t.is(err, undefined);
+    t.is(fs.existsSync(path.join(testCwd, 'test.json')), true);
+
+    t.end();
+  });
+});
+
 test.cb.serial('should generate a json file from object', (t) => {
   create(testCwd, 'test.json', { test: 'string' }, (err) => {
     t.is(err, undefined);
