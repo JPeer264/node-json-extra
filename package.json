@@ -34,10 +34,12 @@
   ],
   "dependencies": {
     "fs-extra": "^1.0.0",
-    "lodash.includes": "^4.3.0"
+    "lodash.includes": "^4.3.0",
+    "object.entries": "^1.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.2.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
