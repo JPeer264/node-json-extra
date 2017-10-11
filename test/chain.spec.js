@@ -43,6 +43,19 @@ test('creates a chained path', (t) => {
   t.is(pathArray[9], 'one/twotwo/threetwo');
 });
 
+test('creates a chained path with another delimiter', (t) => {
+  const pathArray = chain(jsonString, { delimiter: '--' });
+
+  t.is(pathArray[0], 'one');
+  t.is(pathArray[1], 'one--two');
+  t.is(pathArray[2], 'one--two--two-one');
+  t.is(pathArray[3], 'one--two--two-two');
+  t.is(pathArray[4], 'one--twotwo');
+  t.is(pathArray[5], 'one--twotwo--three');
+  t.is(pathArray[6], 'one--twotwo--three--three-one');
+  t.is(pathArray[9], 'one--twotwo--threetwo');
+});
+
 
 test('should not create a path', (t) => {
   jsonString = '{test; "test"}';
