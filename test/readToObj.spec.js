@@ -23,6 +23,15 @@ test.cb('should read a json file to object | promise', (t) => {
     });
 });
 
+test.cb('should read a md file', (t) => {
+  readToObj('README.md')
+    .catch((err) => {
+      t.is(err.error, 'NOJSON');
+
+      t.end();
+    });
+});
+
 test.cb('should fail', (t) => {
   readToObj('doesnotexist.json', (err) => {
     t.is(err, false);

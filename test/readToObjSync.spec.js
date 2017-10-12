@@ -9,7 +9,14 @@ test('should read a json file to object', (t) => {
   t.is(typeof data.name, 'string');
 });
 
-test('should fail', (t) => {
+test('file is no json', (t) => {
+  const data = readToObjSync('README.md');
+
+  t.is(data, false);
+});
+
+
+test('file does not exist', (t) => {
   const data = readToObjSync('doesnotexist.json');
 
   t.is(data, false);
