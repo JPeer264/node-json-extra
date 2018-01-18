@@ -1,3 +1,9 @@
+1.0.1 - January, 18 2018
+
+* 5fbd2bd Chore: recover changelog (JPeer264)
+* d1bfe77 Docs: uppercase readme file (Jan Peer Stöcklmair)
+* d9b7fcd Fix: handle not valid json (JPeer264)
+
 1.0.0 - October, 12 2017
 
 * 0df1cba Chore: update libraries (JPeer264)
