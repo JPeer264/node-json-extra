@@ -14,64 +14,41 @@ afterEach(() => {
   testCwd.removeCallback();
 });
 
-test('should generate a json file from string', (done) => {
-  write(testCwd.name, 'test.json', '{"test": "string"}', (err) => {
-    expect(err).toBe(undefined);
-    expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
+test('should generate a json file from string', async () => {
+  await write(testCwd.name, 'test.json', '{"test": "string"}');
 
-    done();
-  });
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
-test('should generate a json file from string', (done) => {
-  write(testCwd.name, 'test.json', '{"test": "string"}').then((err) => {
-    expect(err).toBe(undefined);
-    expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
+test('should generate a json file from string', async () => {
+  await write(testCwd.name, 'test.json', '{"test": "string"}');
 
-    done();
-  });
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
-test('should generate a json file from object', (done) => {
-  write(testCwd.name, 'test.json', { test: 'string' }, (err) => {
-    expect(err).toBe(undefined);
-    expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
+test('should generate a json file from object', async () => {
+  await write(testCwd.name, 'test.json', { test: 'string' });
 
-    done();
-  });
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
-test('should generate an empty json file', (done) => {
-  write(testCwd.name, 'test.json', (err) => {
-    expect(err).toBe(undefined);
-    expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
+test('should generate an empty json file', async () => {
+  await write(testCwd.name, 'test.json');
 
-    done();
-  });
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
-test('should set the extname to json if it is not set to it', (done) => {
-  write(testCwd.name, 'test.jayson', '{"test": "string"}', (err) => {
-    expect(err).toBe(undefined);
-    expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
-    expect(fs.existsSync(path.join(testCwd.name, 'test.jayson'))).toBe(false);
+test('should set the extname to json if it is not set to it', async () => {
+  await write(testCwd.name, 'test.jayson', '{"test": "string"}');
 
-    done();
-  });
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
+  expect(fs.existsSync(path.join(testCwd.name, 'test.jayson'))).toBe(false);
 });
 
-test('should fail', (done) => {
-  write(testCwd.name, 'test.jayson', 123123, (err) => {
-    expect(err.error).toBe('NOJSON');
-
-    done();
-  });
+test('should fail', async () => {
+  await expect(write(testCwd.name, 'test.jayson', 123123)).rejects.toThrowError();
 });
 
-test('should fail', (done) => {
-  write(testCwd.name, 'test.json', '{"test"; "string"}', (err) => {
-    expect(err.error).toBe('NOJSON');
-
-    done();
-  });
+test('should fail', async () => {
+  await expect(write(testCwd.name, 'test.json', '{"test"; "string"}')).rejects.toThrowError();
 });

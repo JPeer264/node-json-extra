@@ -3,7 +3,8 @@ import path from 'path';
 
 import isJsonString from './isJsonString';
 
-const writeSync = (pathString, filename, content) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const writeSync = (pathString: string, filename: string, content: any): boolean => {
   const combinePath = path.join(pathString, filename);
 
   let thisContent = content;
