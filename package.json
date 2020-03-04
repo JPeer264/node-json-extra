@@ -32,10 +32,9 @@
     "check"
   ],
   "dependencies": {
-    "fs-extra": "^4.0.3",
+    "fs-extra": "^8.0.1",
     "lodash.includes": "^4.3.0",
-    "object.entries": "^1.0.4",
-    "universalify": "^0.1.1"
+    "object.entries": "^1.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -48,7 +47,6 @@
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-register": "^6.26.0",
     "coveralls": "^3.0.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
