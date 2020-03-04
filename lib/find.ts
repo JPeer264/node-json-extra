@@ -1,6 +1,6 @@
 import includes from 'lodash.includes';
 
-type FindType =
+export type FindType =
   | 'array'
   | 'object'
   | 'string'

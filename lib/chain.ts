@@ -1,24 +1,34 @@
 import entries from 'object.entries';
 import includes from 'lodash.includes';
 
+import { FindType } from './find';
 import isJson from './isJson';
 
-let delimiterSeperatedArray;
+let delimiterSeperatedArray: string[];
+
+interface ChainOptions {
+  type: FindType | FindType[];
+  delimiter: string;
+}
 
 /**
  * Make a json file into a delimiter seperated string.
  * It will push everything into the global delimiterSeperatedArray
  */
-const jsonConcat = (json, options, jsonString) => {
-  entries(json).forEach((entryArray) => {
+const jsonConcat = <T extends object>(
+  json: T,
+  options: ChainOptions,
+  jsonString?: string,
+): void => {
+  entries(json).forEach((entryArray: [string, any]) => {
     const key = entryArray[0];
     const value = entryArray[1];
 
-    let generatedJsonString;
-    let typeOfString = typeof value;
+    let generatedJsonString: string;
+    let typeOfString: FindType = typeof value;
 
     // convert arrays from object to array
-    if (Object.prototype.toString.call(value) === '[object Array]') {
+    if (Array.isArray(value)) {
       typeOfString = 'array';
     }
 
@@ -34,7 +44,7 @@ const jsonConcat = (json, options, jsonString) => {
       delimiterSeperatedArray.push(generatedJsonString);
     }
 
-    if (typeOfString === 'array') {
+    if (typeOfString === 'array' && Array.isArray(value)) {
       // arrays should iterate over single values and add it to the global delimiterSeperatedArray
       value.forEach((item) => {
         if (options.type.length === 0 || includes(options.type, typeof item)) {
@@ -48,11 +58,12 @@ const jsonConcat = (json, options, jsonString) => {
   });
 };
 
-const chain = (json, options = {}) => {
-  const otherOptions = options;
-
-  otherOptions.type = otherOptions.type || [];
-  otherOptions.delimiter = otherOptions.delimiter || '/';
+const chain = <T extends object>(json: T, options: Partial<ChainOptions> = {}): string[] => {
+  const newOptions: ChainOptions = {
+    type: [],
+    delimiter: '/',
+    ...options,
+  };
 
   delimiterSeperatedArray = [];
 
@@ -60,7 +71,7 @@ const chain = (json, options = {}) => {
     return [];
   }
 
-  jsonConcat(json, options);
+  jsonConcat(json, newOptions);
 
   return delimiterSeperatedArray;
 };
