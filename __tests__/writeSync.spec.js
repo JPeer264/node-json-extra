@@ -1,40 +1,45 @@
+import tmp from 'tmp';
 import fs from 'fs-extra';
 import path from 'path';
 
 import { writeSync } from '../lib';
 
-const testCwd = 'test/testCache';
+let testCwd;
+
+beforeEach(() => {
+  testCwd = tmp.dirSync();
+});
 
 afterEach(() => {
-  fs.removeSync(testCwd);
+  testCwd.removeCallback();
 });
 
 test('should generate a json file from string', () => {
-  writeSync(testCwd, 'test.json', '{"test": "string"}');
+  writeSync(testCwd.name, 'test.json', '{"test": "string"}');
 
-  expect(fs.existsSync(path.join(testCwd, 'test.json'))).toBe(true);
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
 test('should generate a json file from object', () => {
-  writeSync(testCwd, 'test.json', { test: 'string' });
+  writeSync(testCwd.name, 'test.json', { test: 'string' });
 
-  expect(fs.existsSync(path.join(testCwd, 'test.json'))).toBe(true);
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
 test('should generate an empty json file', () => {
-  writeSync(testCwd, 'test.json');
+  writeSync(testCwd.name, 'test.json');
 
-  expect(fs.existsSync(path.join(testCwd, 'test.json'))).toBe(true);
+  expect(fs.existsSync(path.join(testCwd.name, 'test.json'))).toBe(true);
 });
 
 test('should fail', () => {
-  const file = writeSync(testCwd, 'test.json', '{"test"; "string"}');
+  const file = writeSync(testCwd.name, 'test.json', '{"test"; "string"}');
 
   expect(file).toBe(false);
 });
 
 test('should fail', () => {
-  const file = writeSync(testCwd, 'test.json', 123123);
+  const file = writeSync(testCwd.name, 'test.json', 123123);
 
   expect(file).toBe(false);
 });
