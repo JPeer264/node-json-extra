@@ -29,24 +29,14 @@ import * as json from 'json-extra';
 
 ## Sync vs. Async
 
-Most methods are async by default. All async methods will return a promise if the callback isn't passed.
-
-Sync methods on the other hand will throw if an error occurs.
-
 Example:
 ```js
 import { write, writeSync } from 'json-extra';
 
-// Async with promises:
+// Promises:
 write('/any/path/you/want', 'filename.json', '{json: "string or object"}')
   .then(() => console.log('success!'))
   .catch(err => console.error(err))
-
-// Async with callbacks:
-write('/any/path/you/want', 'filename.json', '{json: "string or object"}', err => {
-  if (err) return console.error(err)
-  console.log('success!')
-})
 
 // Sync:
 try {
@@ -134,7 +124,7 @@ chain(myJsonString, { type: 'string' });
 
 ### readToObj()
 
-**readToObj(path[, callback])**
+**readToObj(path)**
 
 Read a json file and returns an obj.
 
@@ -153,7 +143,7 @@ readToObj('/path/to/json')
 
 ### write()
 
-**write(path, filename[, content, callback])**
+**write(path, filename[, content])**
 
 write a new json file. The content could be a object or a json string.
 
