@@ -8,9 +8,9 @@
     "test": "nyc ava",
     "lint": "eslint lib test",
     "fix": "eslint lib test --fix",
-    "prepublish": "npm run babel",
+    "prepublish": "npm run build",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "babel": "babel lib --out-dir=dest",
+    "build": "rimraf dest && tsc && babel dest -d dest",
     "prepush": "npm test"
   },
   "repository": {
@@ -44,16 +44,18 @@
     "universalify": "^0.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.6",
     "ava": "^0.22.0",
-    "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-env": "^1.2.0",
     "babel-register": "^6.26.0",
     "coveralls": "^3.0.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "husky": "^0.14.3",
-    "nyc": "^11.2.1"
+    "nyc": "^11.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
   }
 }
