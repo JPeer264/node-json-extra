@@ -47,18 +47,18 @@ test('should check if it is an array or object', () => {
 
 
 test('type: should check the type option as string', () => {
-  const foundKeys = find(jsonfile, {
+  const foundKeys = find(jsonfile, 'findme', {
     type: 'string',
-  }, 'findme');
+  });
 
   expect(foundKeys.length).toBe(1);
   expect(foundKeys[0].type).toBe('string');
 });
 
 test('type: should check the type option as array', () => {
-  const foundKeys = find(jsonfile, {
+  const foundKeys = find(jsonfile, 'findme', {
     type: ['object', 'array'],
-  }, 'findme');
+  });
 
   expect(foundKeys.length).toBe(2);
   expect(foundKeys[0].type).toBe('object');
@@ -66,12 +66,12 @@ test('type: should check the type option as array', () => {
 });
 
 test('max: should check if the maximum is reduced', () => {
-  const foundKeys = find(jsonfile, {
+  const foundKeys = find(jsonfile, 'findme', {
     max: 1,
-  }, 'findme');
-  const foundKeys2 = find(jsonfile, {
+  });
+  const foundKeys2 = find(jsonfile, 'findme', {
     max: 2,
-  }, 'findme');
+  });
 
   expect(foundKeys.length).toBe(1);
   expect(foundKeys2.length).toBe(2);

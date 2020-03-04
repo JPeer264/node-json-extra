@@ -172,7 +172,7 @@ write('/any/path/you/want', 'filename.json', '{json: "string or object"}')
 
 ### find()
 
-**find(jsonObject[, options], findString)**
+**find(jsonObject, findString[, options])**
 
 Finds a specific key in the json
 
