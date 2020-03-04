@@ -1,3 +1,29 @@
+2.0.0 - March, 04 2020
+
+* c209869 Chore: update eslint scripts (JPeer264)
+* 83ddbb3 Chore: update husky / add lint-staged (JPeer264)
+* 1e6c50d Chore: remove unnecessary dependencies (JPeer264)
+* b49edd4 Fix: export interface to build (JPeer264)
+* eaabe43 Refactor: chain to ts (JPeer264)
+* fda83af Refactor: tests to ts (JPeer264)
+* 6e12962 Docs: remove callback notice (JPeer264)
+* 77cad9c Refactor: write to ts | write to promise only (JPeer264)
+* 01233f4 Refactor: readToObjSync to ts (JPeer264)
+* 69234b7 Refactor: index to ts (JPeer264)
+* fa8cd35 Refactor: find to ts (JPeer264)
+* 57c114e Refactor: isJson to ts (JPeer264)
+* 262c8d3 Refactor: make readToObj Promise only (JPeer264)
+* 5fe1503 Chore: remove eslint errors (JPeer264)
+* fbc6504 Refactor: default export single functions (JPeer264)
+* a2068df Chore: remove nyc coverage from gitignore (JPeer264)
+* 1e4b6ac Chore: drop node v4/6/8 support | add v10/12 support (JPeer264)
+* 9deb58a Chore: remove vscode folder (JPeer264)
+* e61a591 Test: better testCwd (JPeer264)
+* 86d6627 Test: move from ava to jest (JPeer264)
+* 8344559 Chore: add newer eslint (JPeer264)
+* 9b3b04a Chore: move from babel to typescript (JPeer264)
+* 7156db1 Chore: remove yarn move to npm (JPeer264)
+
 1.0.1 - January, 18 2018
 
 * 5fbd2bd Chore: recover changelog (JPeer264)
