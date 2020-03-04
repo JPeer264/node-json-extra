@@ -1,14 +1,10 @@
 import { readToObj } from '../lib';
 
-test('should read a json file to object', (done) => {
-  readToObj('package.json', (err, data) => {
-    expect(err).toBe(null);
+test('should read a json file to object', async () => {
+  const data = await readToObj('package.json');
 
-    expect(Object.prototype.toString.call(data)).toBe('[object Object]');
-    expect(typeof data.name).toBe('string');
-
-    done();
-  });
+  expect(Object.prototype.toString.call(data)).toBe('[object Object]');
+  expect(typeof data.name).toBe('string');
 });
 
 test('should read a json file to object | promise', (done) => {
@@ -21,19 +17,10 @@ test('should read a json file to object | promise', (done) => {
     });
 });
 
-test('should read a md file', (done) => {
-  readToObj('README.md')
-    .catch((err) => {
-      expect(err.error).toBe('NOJSON');
-
-      done();
-    });
+test('should read a md file', async () => {
+  await expect(readToObj('README.md')).rejects.toThrow(new Error('JSON is not valid'));
 });
 
-test('should fail', (done) => {
-  readToObj('doesnotexist.json', (err) => {
-    expect(err).toBe(false);
-
-    done();
-  });
+test('should fail', async () => {
+  await expect(readToObj('doesnotexist.json')).rejects.toThrow(new Error());
 });
