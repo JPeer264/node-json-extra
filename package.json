@@ -5,12 +5,10 @@
   "main": "dest/index.js",
   "scripts": {
     "test": "jest --coverage",
-    "lint": "eslint lib __tests__",
-    "fix": "eslint lib __tests__ --fix",
+    "lint": "eslint lib/**/*.ts __tests__/**/*.ts",
     "prepublish": "npm run build",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "rimraf dest && tsc && babel dest -d dest",
-    "prepush": "npm test"
+    "build": "rimraf dest && tsc && babel dest -d dest"
   },
   "husky": {
     "hooks": {
