@@ -6,7 +6,7 @@ import isJson from './isJson';
 
 let delimiterSeperatedArray: string[];
 
-interface ChainOptions {
+export interface ChainOptions {
   type: FindType | FindType[];
   delimiter: string;
 }
