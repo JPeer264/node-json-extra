@@ -1,3 +1,7 @@
+2.0.1 - June, 12 2020
+
+* 1d106b0 Chore: fix types (JPeer264)
+
 2.0.0 - March, 04 2020
 
 * c209869 Chore: update eslint scripts (JPeer264)
