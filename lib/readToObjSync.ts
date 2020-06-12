@@ -2,7 +2,7 @@ import fs from 'fs';
 
 import isJsonString from './isJsonString';
 
-const readToObjSync = <T extends object>(path: string): boolean | T => {
+const readToObjSync = <T extends object>(path: string): false | T => {
   // search for file. Fail fast if there is no json File
   if (!fs.existsSync(path)
     || !fs.statSync(path).isFile()
