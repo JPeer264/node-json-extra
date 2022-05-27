@@ -41,7 +41,7 @@
     "check"
   ],
   "dependencies": {
-    "fs-extra": "^8.0.1",
+    "fs-extra": "^9.0.0",
     "lodash.includes": "^4.3.0",
     "object.entries": "^1.0.4"
   },
